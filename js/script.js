@@ -18,3 +18,24 @@
  *    pairs are reordered within the main content
  */
  
+const footnoteReferences = document.getElementsByClassName('ref');
+const references = Array.from(footnoteReferences);
+const citationGroup = document.getElementsByClassName('citation');
+const citations = Array.from(citationGroup);
+
+const footnotesArticle = document.querySelector(".footnotes-article");
+
+
+const generateReferences = () => {
+  const newLocal = 
+  `<div class="footnotes-footer">
+    <ol> ${references.map((n,i) => 
+      `<li id="ref${i+1}"><a href="#citation${i+1}"><span class="ref">${n.innerHTML}</span></a></li>`)} 
+    </ol>
+  </div>`;
+  const list = newLocal;
+
+  return footnotesArticle.insertAdjacentHTML("beforeend", list);
+}
+
+generateReferences();
