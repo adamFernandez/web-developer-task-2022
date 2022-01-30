@@ -4,4 +4,4 @@
 
 Exercise where a function generates footnotes from citations which automatically rearrange (updates order) on citations rearrangement.
 
-For some reason I can't get rid of 
+I had some issues at the beginning but finally came to a nice solution.
