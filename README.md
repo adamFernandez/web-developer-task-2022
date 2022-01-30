@@ -3,3 +3,5 @@
 ## Adam Fernandez 
 
 Exercise where a function generates footnotes from citations which automatically rearrange (updates order) on citations rearrangement.
+
+For some reason I can't get rid of 

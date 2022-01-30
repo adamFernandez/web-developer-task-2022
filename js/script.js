@@ -33,40 +33,40 @@ const citationLinksArray = Array.from(citationLinks);
 
 const footnotesArticle = document.querySelector(".footnotes-article");
 
+citations.forEach(c => c.style.cursor = "pointer" );
 
 const generateReferences = () => {
   // creating the snippet
   citations.forEach((c,i) => (c.querySelector('.ref').hidden = true, c.setAttribute("onClick", `location.href='#listRef${i}'`)))
-  let listItems = references.map((n,i) => {
-    return `<li id="listRef${i}" class="listRef"><span class="ref">${n.innerHTML}</span></li>`;
-  });
-  
-  const list = 
-  `<div class="footnotes-footer">
-    <ol>${ listItems }</ol>
-  </div>`;
 
-  // adding ordered attributes to citation links
-  // citationLinksArray.forEach((c,i) => (
-  //   c.setAttribute("id", `citacion${i}`), 
-  //   c.setAttribute("href", `#ref${i}`)
-  // ))
-  
-  return footnotesArticle.insertAdjacentHTML("beforeend", list);
+  let list = document.createElement('ol');
+
+  references.forEach((r,i) => (
+    listItem = document.createElement('li'),
+    listItem.setAttribute('id', `listRef${i}`),
+    listItem.classList.add('listRef'),
+    ref = document.createElement('span'),
+    ref.classList.add('ref'),
+    ref.innerHTML = r.innerHTML,
+    listItem.appendChild(ref),
+    list.appendChild(listItem)
+  ))
+
+  let notesFooter = document.createElement('div');
+  notesFooter.classList.add('footnotes-footer');
+  notesFooter.appendChild(list);
+  footnotesArticle.appendChild(notesFooter);
+
 }
 
 generateReferences();
 
-
 // get the index of the clicked element 
 // and add the selected class to its footnote 
-
-
-
 footnotesBody.onclick = (e) => {
   let targetIndex = 0;
   if(e.target.closest('.citation')){
-
+    
     // get the index of the clicked element
     targetIndex = Array.from(citationGroup).indexOf(e.target);
     // ol list elements selectors
