@@ -36,18 +36,21 @@ const footnotesArticle = document.querySelector(".footnotes-article");
 
 const generateReferences = () => {
   // creating the snippet
+  citations.forEach((c,i) => (c.querySelector('.ref').hidden = true, c.setAttribute("onClick", `location.href='#listRef${i}'`)))
+  let listItems = references.map((n,i) => {
+    return `<li id="listRef${i}" class="listRef"><span class="ref">${n.innerHTML}</span></li>`;
+  });
+  
   const list = 
   `<div class="footnotes-footer">
-    <ol> ${references.map((n,i) => 
-      `<li id="listRef${i}" class="listRef"><a href="#citation${i}" id="ref${i}"><span class="ref">${n.innerHTML}</span></a></li>`)} 
-    </ol>
+    <ol>${ listItems }</ol>
   </div>`;
 
   // adding ordered attributes to citation links
-  citationLinksArray.forEach((c,i) => (
-    c.setAttribute("id", `citacion${i}`), 
-    c.setAttribute("href", `#ref${i}`)
-  ))
+  // citationLinksArray.forEach((c,i) => (
+  //   c.setAttribute("id", `citacion${i}`), 
+  //   c.setAttribute("href", `#ref${i}`)
+  // ))
   
   return footnotesArticle.insertAdjacentHTML("beforeend", list);
 }
@@ -61,9 +64,8 @@ generateReferences();
 
 
 footnotesBody.onclick = (e) => {
-  console.log(e.target.parentNode);
   let targetIndex = 0;
-  if(e.target.closest('.citation-link')){
+  if(e.target.closest('.citation')){
 
     // get the index of the clicked element
     targetIndex = Array.from(citationGroup).indexOf(e.target);
